@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Mohan Medipalli | Portfolio</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        @theme {
+            --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+        }
+
+        :root {
+            --emerald-400: #34d399;
+            --cyan-400: #22d3ee;
+            --blue-400: #60a5fa;
+        }
+
+        body {
+            background-color: #09090b;
+            color: #d4d4d8;
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        .bg-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-color: #09090b;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(245, 158, 11, 0.1) 0px, transparent 50%);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #34d399, #22d3ee, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .skill-item {
+            transition: all 0.3s ease;
+        }
+
+        .skill-item.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center glass px-6 py-3 rounded-2xl shadow-2xl">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg flex items-center justify-center font-bold text-zinc-950 text-sm">
+                    KM
+                </div>
+                <span class="font-bold text-white tracking-tight hidden sm:block">Medipalli</span>
+            </div>
+            <div class="flex gap-4 sm:gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+                <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-24 px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-6">
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> Available for opportunities
+                    </div>
+                    <h1 class="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9]">
+                        Krishna <br>
+                        <span class="text-gradient">Mohan</span>
+                    </h1>
+                    <p id="hero-summary" class="text-xl text-zinc-400 max-w-lg leading-relaxed mb-10 font-light"></p>
+                    
+                    <div class="flex flex-wrap gap-6 text-sm text-zinc-500 mb-12">
+                        <a id="hero-email" href="" class="flex items-center gap-2 hover:text-emerald-400 transition-colors group">
+                            <div class="p-2 rounded-lg bg-white/5 group-hover:bg-emerald-500/10 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <span class="email-text"></span>
+                        </a>
+                        <div class="flex items-center gap-2 group">
+                            <div class="p-2 rounded-lg bg-white/5 group-hover:bg-cyan-500/10 transition-colors">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            </div>
+                            <span id="hero-phone"></span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a id="github-link" href="" target="_blank" class="px-6 py-3 bg-white text-zinc-950 rounded-2xl font-bold text-sm flex items-center gap-2 hover:bg-zinc-100 transition-all transform hover:scale-105 active:scale-95">
+                            <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                        </a>
+                        <a id="linkedin-link" href="" target="_blank" class="px-6 py-3 glass text-white rounded-2xl font-bold text-sm flex items-center gap-2 glass-hover transition-all transform hover:scale-105 active:scale-95">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative hidden lg:block reveal" style="transition-delay: 0.2s;">
+                    <div class="aspect-square rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 blur-3xl absolute inset-0 animate-pulse-slow"></div>
+                    <div class="relative glass rounded-[4rem] p-12 border-white/20 transform rotate-3 hover:rotate-0 transition-transform duration-700">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10 flex flex-col gap-4">
+                                <i data-lucide="terminal" class="w-8 h-8 text-emerald-400"></i>
+                                <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Frontend</span>
+                                <span class="text-2xl font-bold text-white">React & JS</span>
+                            </div>
+                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10 flex flex-col gap-4 mt-12">
+                                <i data-lucide="palette" class="w-8 h-8 text-cyan-400"></i>
+                                <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Design</span>
+                                <span class="text-2xl font-bold text-white">Photoshop</span>
+                            </div>
+                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10 flex flex-col gap-4 -mt-6">
+                                <i data-lucide="cpu" class="w-8 h-8 text-blue-400"></i>
+                                <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Logic</span>
+                                <span class="text-2xl font-bold text-white">Algorithms</span>
+                            </div>
+                            <div class="p-6 rounded-3xl bg-white/5 border border-white/10 flex flex-col gap-4 mt-6">
+                                <i data-lucide="layers" class="w-8 h-8 text-purple-400"></i>
+                                <span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Marketing</span>
+                                <span class="text-2xl font-bold text-white">SEO/SEM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-24 space-y-40">
+        
+        <!-- Skills Section -->
+        <section id="skills" class="reveal">
+            <div class="flex items-center gap-4 mb-10 group">
+                <div class="p-3 rounded-2xl bg-emerald-500 shadow-lg shadow-emerald-500/20">
+                    <i data-lucide="code" class="w-6 h-6 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight text-white">Skills & Expertise</h2>
+            </div>
+            
+            <div class="flex gap-4 mb-12 overflow-x-auto pb-4 no-scrollbar">
+                <button onclick="filterSkills('all')" class="filter-btn active px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all bg-emerald-500 text-zinc-950 shadow-lg shadow-emerald-500/20">all</button>
+                <button onclick="filterSkills('tech')" class="filter-btn px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all glass text-zinc-500 hover:text-white">tech</button>
+                <button onclick="filterSkills('design')" class="filter-btn px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all glass text-zinc-500 hover:text-white">design</button>
+                <button onclick="filterSkills('marketing')" class="filter-btn px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all glass text-zinc-500 hover:text-white">marketing</button>
+            </div>
+
+            <div id="skills-container" class="flex flex-wrap gap-3">
+                <!-- Skills will be injected here -->
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="reveal">
+            <div class="flex items-center gap-4 mb-10 group">
+                <div class="p-3 rounded-2xl bg-blue-500 shadow-lg shadow-blue-500/20">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight text-white">Professional Journey</h2>
+            </div>
+            <div id="experience-container" class="space-y-12">
+                <!-- Experience will be injected here -->
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="reveal">
+            <div class="flex items-center gap-4 mb-10 group">
+                <div class="p-3 rounded-2xl bg-cyan-500 shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="gamepad-2" class="w-6 h-6 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight text-white">Featured Creations</h2>
+            </div>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Projects will be injected here -->
+            </div>
+        </section>
+
+        <!-- Education & Certificates Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <section class="reveal">
+                <div class="flex items-center gap-4 mb-10 group">
+                    <div class="p-3 rounded-2xl bg-purple-500 shadow-lg shadow-purple-500/20">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Education</h2>
+                </div>
+                <div id="education-container" class="space-y-8">
+                    <!-- Education will be injected here -->
+                </div>
+            </section>
+
+            <section class="reveal">
+                <div class="flex items-center gap-4 mb-10 group">
+                    <div class="p-3 rounded-2xl bg-orange-500 shadow-lg shadow-orange-500/20">
+                        <i data-lucide="award" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Certifications</h2>
+                </div>
+                <div id="certificates-container" class="space-y-4">
+                    <!-- Certificates will be injected here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Interests Section -->
+        <section class="reveal">
+            <div class="flex items-center gap-4 mb-10 group">
+                <div class="p-3 rounded-2xl bg-pink-500 shadow-lg shadow-pink-500/20">
+                    <i data-lucide="puzzle" class="w-6 h-6 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold tracking-tight text-white">Personal Interests</h2>
+            </div>
+            <div id="interests-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Interests will be injected here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-32 pb-12 border-t border-white/5 text-center relative overflow-hidden reveal">
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 bg-emerald-500/5 blur-3xl rounded-full -z-10"></div>
+            
+            <div class="flex flex-col items-center gap-6">
+                <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-2xl flex items-center justify-center font-bold text-zinc-950 text-xl">
+                    KM
+                </div>
+                <div>
+                    <p id="footer-name" class="text-2xl font-bold text-white mb-2"></p>
+                    <p class="text-xs text-zinc-500 uppercase tracking-[0.3em]">Mangalagiri, 16/03/2026</p>
+                </div>
+                
+                <div class="max-w-md mx-auto mt-8 p-6 rounded-2xl bg-white/5 border border-white/5">
+                    <p class="text-xs text-zinc-500 uppercase tracking-widest mb-4">Declaration</p>
+                    <p class="text-sm text-zinc-400 italic">
+                        "I hereby declare that all the information provided above is true"
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const resumeData = {
+            name: "Krishna Mohan Medipalli",
+            email: "krishnamohan979403@gmail.com",
+            phone: "9014629637",
+            location: "Mangalagiri",
+            links: {
+                sololearn: "sololearn.com/en/profile/23161721",
+                linkedin: "linkedin.com/in/krishna-mohan-32a3b6238",
+                github: "github.com/Krishna7886",
+            },
+            summary: "Computer Science graduate with skills in web development, digital marketing, and graphic design. Experienced in HTML, CSS, JavaScript, SEO, and social media marketing, with internship experience at Efftronics Systems Private Limited. Passionate about building creative digital solutions and continuously learning new technologies.",
+            skills: {
+                technical: ["HTML5", "CSS3", "JavaScript", "Responsive Web Design", "WordPress"],
+                digitalMarketing: ["SEO", "SEM", "Social Media Marketing", "Email Marketing", "Google Analytics"],
+                designTools: ["Adobe Photoshop", "Illustrator", "InDesign", "CorelDRAW", "Canva", "Logo & Brand Design"],
+                otherTools: ["Git / GitHub (Basic)", "Microsoft Excel / Word / PowerPoint"],
+            },
+            education: [
+                {
+                    degree: "BTech in Computer Science and Engineering",
+                    institution: "Priyadarshini Engineering College",
+                    period: "03/2021 – 12/2025",
+                    location: "Tenali",
+                    details: "Secured 75%",
+                },
+                {
+                    degree: "Inter (MPC Stream)",
+                    institution: "Genesis Junior College",
+                    period: "03/2019 – 03/2021",
+                    location: "Vijayawada",
+                    details: "86%",
+                },
+                {
+                    degree: "SSC (Secondary School Certificate)",
+                    institution: "Zion Evangelical Missionary School",
+                    period: "03/2018 – 03/2019",
+                    location: "Jonnalagadda",
+                    details: "GPA: 8.7",
+                },
+            ],
+            projects: [
+                {
+                    title: "Ludo Game",
+                    period: "05/2025 – 06/2025",
+                    description: "Created a smart Ludo game using AI tools to simulate decision-making for computer players, focusing on logic, gameplay experience, and interface design.",
+                    details: [],
+                },
+                {
+                    title: "Chess Game Bot",
+                    period: "02/2025 – 04/2025",
+                    description: "Developed a chess game using JavaScript and AI tools to simulate intelligent move prediction.",
+                    details: [
+                        "Implemented game logic, board interactions, and user interface.",
+                        "Focused on improving gameplay experience and strategic AI decisions.",
+                    ],
+                },
+            ],
+            certificates: [
+                {
+                    title: "HTML / C++ / JavaScript / Game Development with JS / Python / Java",
+                    platform: "SoloLearn",
+                    description: "All certifications completed through the SoloLearn mobile and web learning platform.",
+                },
+                {
+                    title: "Problem Solving (Basic) / Python (Basic)",
+                    platform: "HackerRank",
+                    description: "All certifications completed through the HackerRank mobile and web learning platform.",
+                },
+                {
+                    title: "Business Development and Graphic Designer",
+                    platform: "Efftronics Systems Private Limited",
+                    description: "Business Development Certificate & Graphic Design Certificate. Received for completing a Graphic Design & Business Development internship/project (July 2025).",
+                },
+                {
+                    title: "Digital Marketing",
+                    platform: "DegiSoft AI",
+                    description: "Completed Digital Marketing training. Gained knowledge in SEO, Social Media Marketing, Email Marketing, Content Marketing, and the use of AI tools in digital marketing strategies.",
+                },
+            ],
+            experience: [
+                {
+                    role: "Business Development, Graphic Design, and Frontend Development Intern",
+                    company: "Efftronics Systems Private Limited",
+                    period: "July 2025",
+                    location: "Mangalagiri",
+                    details: [
+                        "Supported business growth through client research and lead generation",
+                        "Created marketing and branding materials using graphic design tools",
+                        "Assisted in developing and improving frontend components using HTML, CSS, and JavaScript",
+                        "Collaborated with cross-functional teams to align design and development with business goals",
+                    ],
+                },
+            ],
+            interests: [
+                {
+                    title: "Playing Chess",
+                    description: "Chess Enthusiast - Actively plays online chess on platforms like Chess.com with a current Blitz rating of 927, 900 on Rapid and 870 on Bullet. Participate in daily games and tournaments, focusing on strategic thinking, patience, and decision-making under pressure.",
+                },
+                {
+                    title: "Solving Rubik's Cube",
+                    description: "Speedcubing & Puzzle Solving. Skilled in solving a wide range of Rubik's cubes, including 2x2, 3x3, up to 15x15. Also proficient in solving Megaminx cubes (3x3, 5x5, 7x7, 9x9, 11x11, 13x13, 15x15) and Mirror Cubes and More. Passionate about pattern recognition, logical thinking, and cognitive challenges.",
+                },
+            ],
+        };
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Inject Data
+        document.getElementById('hero-summary').textContent = resumeData.summary;
+        document.querySelector('.email-text').textContent = resumeData.email;
+        document.getElementById('hero-email').href = `mailto:${resumeData.email}`;
+        document.getElementById('hero-phone').textContent = resumeData.phone;
+        document.getElementById('github-link').href = `https://${resumeData.links.github}`;
+        document.getElementById('linkedin-link').href = `https://${resumeData.links.linkedin}`;
+        document.getElementById('footer-name').textContent = resumeData.name;
+
+        // Render Skills
+        const skillsContainer = document.getElementById('skills-container');
+        const allSkills = [
+            ...resumeData.skills.technical.map(s => ({ name: s, type: 'tech' })),
+            ...resumeData.skills.designTools.map(s => ({ name: s, type: 'design' })),
+            ...resumeData.skills.digitalMarketing.map(s => ({ name: s, type: 'marketing' }))
+        ];
+
+        function renderSkills() {
+            skillsContainer.innerHTML = '';
+            allSkills.forEach(skill => {
+                const color = skill.type === 'tech' ? 'bg-emerald-400' : skill.type === 'design' ? 'bg-cyan-400' : 'bg-blue-400';
+                const el = document.createElement('span');
+                el.className = `skill-item px-4 py-2 rounded-xl text-sm font-medium border border-white/10 glass glass-hover cursor-default flex items-center gap-2`;
+                el.dataset.type = skill.type;
+                el.innerHTML = `<div class="w-1.5 h-1.5 rounded-full ${color}"></div>${skill.name}`;
+                skillsContainer.appendChild(el);
+            });
+        }
+        renderSkills();
+
+        function filterSkills(type) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-emerald-500', 'text-zinc-950', 'shadow-lg', 'shadow-emerald-500/20');
+                btn.classList.add('glass', 'text-zinc-500');
+                if (btn.textContent.toLowerCase() === type) {
+                    btn.classList.add('active', 'bg-emerald-500', 'text-zinc-950', 'shadow-lg', 'shadow-emerald-500/20');
+                    btn.classList.remove('glass', 'text-zinc-500');
+                }
+            });
+
+            // Filter items
+            document.querySelectorAll('.skill-item').forEach(item => {
+                if (type === 'all' || item.dataset.type === type) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Render Experience
+        const expContainer = document.getElementById('experience-container');
+        resumeData.experience.forEach(exp => {
+            const el = document.createElement('div');
+            el.className = 'p-8 rounded-[2rem] glass relative group';
+            el.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">${exp.role}</h3>
+                        <div class="text-emerald-400 font-medium flex items-center gap-2">
+                            ${exp.company} <span class="text-zinc-700">•</span> ${exp.location}
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-zinc-500 bg-zinc-900/50 px-4 py-2 rounded-xl border border-white/5 self-start md:self-center">
+                        ${exp.period}
+                    </span>
+                </div>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${exp.details.map(detail => `
+                        <li class="text-zinc-400 text-sm flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                            <div class="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400"></i>
+                            </div>
+                            ${detail}
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            expContainer.appendChild(el);
+        });
+
+        // Render Projects
+        const projectsContainer = document.getElementById('projects-container');
+        resumeData.projects.forEach(project => {
+            const el = document.createElement('div');
+            el.className = 'p-8 rounded-3xl glass glass-hover relative overflow-hidden group';
+            el.innerHTML = `
+                <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                    <i data-lucide="gamepad-2" class="w-8 h-8 text-emerald-400"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">${project.title}</h3>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-zinc-900/50 px-2 py-1 rounded-md border border-white/5">${project.period}</span>
+                    </div>
+                    <p class="text-zinc-400 text-sm leading-relaxed mb-6">${project.description}</p>
+                    ${project.details.length > 0 ? `
+                        <ul class="space-y-3">
+                            ${project.details.map(detail => `
+                                <li class="text-xs text-zinc-500 flex items-start gap-3">
+                                    <div class="w-1 h-1 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></div>
+                                    ${detail}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-500/5 blur-3xl rounded-full group-hover:bg-emerald-500/10 transition-colors"></div>
+            `;
+            projectsContainer.appendChild(el);
+        });
+
+        // Render Education
+        const eduContainer = document.getElementById('education-container');
+        resumeData.education.forEach(edu => {
+            const el = document.createElement('div');
+            el.className = 'relative pl-8 border-l border-white/10';
+            el.innerHTML = `
+                <div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-purple-500"></div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 block">${edu.period}</span>
+                <h3 class="text-lg font-bold text-white mb-1">${edu.degree}</h3>
+                <p class="text-zinc-500 text-sm mb-2">${edu.institution} • ${edu.location}</p>
+                <p class="text-xs font-bold text-purple-400 uppercase tracking-widest">${edu.details}</p>
+            `;
+            eduContainer.appendChild(el);
+        });
+
+        // Render Certificates
+        const certContainer = document.getElementById('certificates-container');
+        resumeData.certificates.forEach(cert => {
+            const el = document.createElement('div');
+            el.className = 'p-6 rounded-2xl glass glass-hover';
+            el.innerHTML = `
+                <h3 class="font-bold text-white text-sm mb-2">${cert.title}</h3>
+                <div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+                    <span class="text-orange-400">${cert.platform}</span>
+                </div>
+            `;
+            certContainer.appendChild(el);
+        });
+
+        // Render Interests
+        const interestsContainer = document.getElementById('interests-container');
+        resumeData.interests.forEach(interest => {
+            const icon = interest.title === "Playing Chess" ? 'gamepad-2' : 'puzzle';
+            const el = document.createElement('div');
+            el.className = 'p-8 rounded-3xl glass border-pink-500/10';
+            el.innerHTML = `
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <i data-lucide="${icon}" class="w-5 h-5 text-pink-400"></i>
+                    ${interest.title}
+                </h3>
+                <p class="text-sm text-zinc-400 leading-relaxed font-light">${interest.description}</p>
+            `;
+            interestsContainer.appendChild(el);
+        });
+
+        // Re-initialize icons for injected content
+        lucide.createIcons();
+
+        // Reveal on Scroll
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
